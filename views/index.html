@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>CORS demo</title>
+    <script
+      src="https://code.jquery.com/jquery-3.2.1.min.js"
+      integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+      crossorigin="anonymous">
+    </script>
+
+    <script type="text/javascript">
+      const url = 'http://api.hubapi.com/keywords/v1/keywords?hapikey=demo';
+
+      $.ajax(url).then(
+        (data) => console.log(data),
+        () => {
+          console.error('Request is not allowed! Using the CORS hack instead:');
+          $.ajax('/cors', { data: { url } }).then(
+            data => console.log(data),
+            (err) => console.error(err)
+          );
+        }
+      );
+    </script>
+
+  </head>
+  <body>
+    <h1>Cross-Origin Resource Sharing</h1>
+    <p>Open the console to see the output of this code:</p>
+
+    <pre><code>
+  const url = 'http://api.hubapi.com/keywords/v1/keywords?hapikey=demo';
+
+  $.ajax(url).then(
+    (data) => console.log(data),
+    () => {
+      console.error('Request is not allowed! Using the CORS hack instead:');
+      $.ajax('/cors', { data: { url } }).then(
+        data => console.log(data),
+        (err) => console.error(err)
+      );
+    }
+  );
+    </code></pre>
+  </body>
+</html>
